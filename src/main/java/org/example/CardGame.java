@@ -15,16 +15,28 @@ public class CardGame {
         }
     }
 
-    public ArrayList getDeck() {
+    public ArrayList<Card> getDeck() {
         for(Card card : deck){
             System.out.println(card.toString());
         }
-
         return deck;
     }
 
     public String getName() {
         return name;
     }
+
+    public Card dealCard(){
+        Card topCard = deck.getLast();
+        deck.removeLast();
+
+        return topCard;
+    }
+
+    public void sortDeckInNumberOrder(){
+        deck.sort();
+    }
+
+
 }
 

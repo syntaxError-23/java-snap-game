@@ -4,6 +4,9 @@ public class Main {
     public static void main(String[] args){
         CardGame exampleGame = new CardGame("Game 1");
 
-        exampleGame.getDeck();
+        for(int i = 0; i < 10; i++){
+            System.out.println("Top card: " + exampleGame.dealCard());
+        }
+
     }
 }
