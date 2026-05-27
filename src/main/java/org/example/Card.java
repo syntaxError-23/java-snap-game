@@ -16,4 +16,16 @@ public class Card {
     public String toString(){
         return this.stringCardValue + " of " + this.cardSuit;
     }
+
+    public String getCardSuit() {
+        return cardSuit;
+    }
+
+    public String getStringCardValue() {
+        return stringCardValue;
+    }
+
+    public int getIntCardValue() {
+        return intCardValue;
+    }
 }

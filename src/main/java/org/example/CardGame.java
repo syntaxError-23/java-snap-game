@@ -1,5 +1,6 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class CardGame {
     private ArrayList<Card> deck = new ArrayList<>();
@@ -34,9 +35,11 @@ public class CardGame {
     }
 
     public void sortDeckInNumberOrder(){
-        deck.sort();
+        deck.sort((a,b) -> a.getIntCardValue() - b.getIntCardValue());
     }
 
+
+    
 
 }
 
