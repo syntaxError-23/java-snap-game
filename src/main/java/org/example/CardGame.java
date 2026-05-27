@@ -1,0 +1,30 @@
+package org.example;
+import java.util.ArrayList;
+
+public class CardGame {
+    private ArrayList<Card> deck = new ArrayList<>();
+    private String name;
+
+    public CardGame(String name) {
+        this.name = name;
+
+        for(CardValue value : CardValue.values()){
+            for (Suit suit : Suit.values()){
+                deck.add(new Card(suit.getSuit(), value.getStringValue(), value.getIntValue()));
+            }
+        }
+    }
+
+    public ArrayList getDeck() {
+        for(Card card : deck){
+            System.out.println(card.toString());
+        }
+
+        return deck;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
