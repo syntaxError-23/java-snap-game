@@ -14,5 +14,11 @@ public class Main {
 
         exampleGame.getDeck();
 
+        System.out.println("-----------------------------------------");
+
+        exampleGame.shuffleDeck();
+
+        exampleGame.getDeck();
+
     }
 }

@@ -1,5 +1,6 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class CardGame {
@@ -42,8 +43,10 @@ public class CardGame {
         deck.sort((a, b) -> a.getCardSuit().compareTo(b.getCardSuit()));
     }
 
+    public void shuffleDeck(){
+        Collections.shuffle(deck);
+    }
 
-    
 
 }
 
