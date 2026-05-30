@@ -1,7 +1,5 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Snap extends CardGame{
 
@@ -20,9 +18,22 @@ public class Snap extends CardGame{
             ArrayList<Card> compareCards = new ArrayList<>();
 
             Player p1 = new Player("Player 1");
+            System.out.println("Player 1");
             p1.setName();
+//            Player p2 = new Player("Player 2");
+//            System.out.println("Player 2");
+//            p2.setName();
+
 
             shuffleDeck();
+
+//            for (Card card : getDeck()){
+//                p1.addCardToPlayerDeck(dealCard());
+//                p2.addCardToPlayerDeck(dealCard());
+//            }
+//
+//            System.out.println(p1.getPlayerDeck());
+//            System.out.println(p2.getPlayerDeck());
 
             while(!endGame) {
                 //First turn
@@ -39,19 +50,20 @@ public class Snap extends CardGame{
                         }
                         continue;
                     }
-
-                    compareCards.add(dealCard());
-                    compareCards.add(dealCard());
                 }
 
+                if(currentTurn == 1) {
+                    compareCards.add(dealCard());
+                    compareCards.add(dealCard());
+                }else if(currentTurn > 1){
                     compareCards.removeFirst();
                     compareCards.add(dealCard());
-
+                }
 
                 System.out.println(compareCards.get(0));
                 System.out.println(compareCards.get(1));
 
-                if(compareCards.get(0).getCardSuit().equals(compareCards.get(1).getCardSuit())){
+                if(compareCards.get(0).getStringCardValue().equals(compareCards.get(1).getStringCardValue())){
                     System.out.println("SNAP");
                     endGame = true;
                 }
