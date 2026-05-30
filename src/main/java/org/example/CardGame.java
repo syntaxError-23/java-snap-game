@@ -38,6 +38,10 @@ public class CardGame {
         deck.sort((a,b) -> a.getIntCardValue() - b.getIntCardValue());
     }
 
+    public void sortDeckInSuitOrder() {
+        deck.sort((a, b) -> a.getCardSuit().compareTo(b.getCardSuit()));
+    }
+
 
     
 

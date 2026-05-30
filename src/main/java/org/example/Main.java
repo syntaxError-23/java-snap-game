@@ -8,5 +8,11 @@ public class Main {
 
         exampleGame.getDeck();
 
+        exampleGame.sortDeckInSuitOrder();
+
+        System.out.println("-----------------------------------------");
+
+        exampleGame.getDeck();
+
     }
 }
