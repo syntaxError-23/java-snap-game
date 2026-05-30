@@ -2,23 +2,38 @@ package org.example;
 
 public class Main {
     public static void main(String[] args){
-        CardGame exampleGame = new CardGame("Game 1");
+//        CardGame exampleGame = new CardGame("Game 1");
+//
+//        exampleGame.sortDeckInNumberOrder();
+//
+//        exampleGame.getDeck();
+//
+//        exampleGame.sortDeckInSuitOrder();
+//
+//        System.out.println("-----------------------------------------");
+//
+//        exampleGame.getDeck();
+//
+//        System.out.println("-----------------------------------------");
+//
+//        exampleGame.shuffleDeck();
 
-        exampleGame.sortDeckInNumberOrder();
+//        exampleGame.getDeck();
 
-        exampleGame.getDeck();
 
-        exampleGame.sortDeckInSuitOrder();
+
+
+        Snap test = new Snap();
+        test.getDeck();
 
         System.out.println("-----------------------------------------");
-
-        exampleGame.getDeck();
-
+        System.out.println("-----------------------------------------");
         System.out.println("-----------------------------------------");
 
-        exampleGame.shuffleDeck();
+        test.playGame();
 
-        exampleGame.getDeck();
+
+
 
     }
 }
