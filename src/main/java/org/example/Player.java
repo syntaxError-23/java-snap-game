@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Player {
 
     private String name;
-    Scanner scanner = new Scanner(System.in);
 
     public Player(String name){
         this.name = name;
@@ -17,7 +16,7 @@ public class Player {
         return name;
     }
 
-    public void setName() {
+    public void setName(Scanner scanner) {
         System.out.println("Enter player name: ");
         String userInput = scanner.nextLine();
 
