@@ -50,6 +50,14 @@ public class CardGame {
         return deck.size();
     }
 
+    public void replenishDeck(){
+        for(CardValue value : CardValue.values()){
+            for (Suit suit : Suit.values()){
+                deck.add(new Card(suit.getSuit(), value.getStringValue(), value.getIntValue()));
+            }
+        }
+    }
+
 
 }
 

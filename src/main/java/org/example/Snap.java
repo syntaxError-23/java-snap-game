@@ -9,9 +9,6 @@ public class Snap extends CardGame{
 
     Scanner scanner = new Scanner(System.in);
 
-
-
-
         public void playGame(){
             boolean endGame = false;
             int currentTurn = 1;
@@ -25,6 +22,7 @@ public class Snap extends CardGame{
 //            p2.setName();
 
 
+
             shuffleDeck();
 
 //            for (Card card : getDeck()){
@@ -36,6 +34,11 @@ public class Snap extends CardGame{
 //            System.out.println(p2.getPlayerDeck());
 
             while(!endGame) {
+                if(noOfCards() == 0){
+                    replenishDeck();
+                    shuffleDeck();
+                }
+
                 //First turn
                 if(currentTurn == 1){
                     System.out.println("To start the game, press enter. To quit, press q: ");
