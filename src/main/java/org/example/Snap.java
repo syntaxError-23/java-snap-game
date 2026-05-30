@@ -1,6 +1,5 @@
 package org.example;
-
-
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -12,20 +11,54 @@ public class Snap extends CardGame{
 
     Scanner scanner = new Scanner(System.in);
 
-    public void playGame(){
-
-        Player p1 = new Player("Player 1");
 
 
-//        System.out.println("Enter player name: ");
-//
-//        if(Objects.equals(scanner.nextLine(), "")){
-//            System.out.println("Default name used");
-//            System.out.println("Welcome " + p1.getName());
-//        } else {
-//            p1.setName(scanner.nextLine());
-//            System.out.println("Welcome " + p1.getName());
-//        }
 
-    }
+        public void playGame(){
+            boolean endGame = false;
+            int currentTurn = 1;
+            ArrayList<Card> compareCards = new ArrayList<>();
+
+            Player p1 = new Player("Player 1");
+            p1.setName();
+
+            shuffleDeck();
+
+            while(!endGame) {
+                //First turn
+                if(currentTurn == 1){
+                    System.out.println("To start the game, press enter. To quit, press q: ");
+                    String gameStarted = scanner.nextLine();
+
+                    if (!gameStarted.isEmpty()){
+                        if (gameStarted.equalsIgnoreCase("q")){
+                            System.out.println("Game ended");
+                            endGame = true;
+                        } else {
+                            System.out.println("Invalid input");
+                        }
+                        continue;
+                    }
+
+                    compareCards.add(dealCard());
+                    compareCards.add(dealCard());
+                }
+
+                    compareCards.removeFirst();
+                    compareCards.add(dealCard());
+
+
+                System.out.println(compareCards.get(0));
+                System.out.println(compareCards.get(1));
+
+                if(compareCards.get(0).getCardSuit().equals(compareCards.get(1).getCardSuit())){
+                    System.out.println("SNAP");
+                    endGame = true;
+                }
+
+                System.out.println("NoOfCardsInDeck: " + noOfCards());
+
+                currentTurn++;
+            }
+        }
 }

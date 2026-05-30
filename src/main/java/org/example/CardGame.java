@@ -31,7 +31,6 @@ public class CardGame {
     public Card dealCard(){
         Card topCard = deck.getLast();
         deck.removeLast();
-
         return topCard;
     }
 
@@ -45,6 +44,10 @@ public class CardGame {
 
     public void shuffleDeck(){
         Collections.shuffle(deck);
+    }
+
+    public int noOfCards(){
+        return deck.size();
     }
 
 
