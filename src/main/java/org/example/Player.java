@@ -7,11 +7,14 @@ import java.util.Scanner;
 public class Player {
 
     private String name;
-    private ArrayList<Card> playerDeck = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public Player(String name){
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName() {
@@ -25,21 +28,5 @@ public class Player {
             this.name = userInput;
             System.out.println("Welcome " + this.name);
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Card> getPlayerDeck() {
-        return playerDeck;
-    }
-
-    public void setPlayerDeck(ArrayList<Card> playerDeck) {
-        this.playerDeck = playerDeck;
-    }
-
-    public void addCardToPlayerDeck(Card card){
-        playerDeck.add(card);
     }
 }
