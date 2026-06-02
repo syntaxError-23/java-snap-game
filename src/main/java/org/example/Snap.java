@@ -1,6 +1,6 @@
 package org.example;
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.*;
 
 public class Snap extends CardGame{
 
@@ -10,7 +10,13 @@ public class Snap extends CardGame{
 
     Scanner scanner = new Scanner(System.in);
 
-    public void playGame(){
+    private void printNoOfCards(){
+        System.out.println("--------------------------");
+        System.out.println("NoOfCardsInDeck: " + noOfCards());
+        System.out.println("--------------------------");
+    }
+
+    public void playGame() throws InterruptedException, IOException {
         boolean endGame = false;
         int currentTurn = 1;
         ArrayList<Card> compareCards = new ArrayList<>();
@@ -25,8 +31,10 @@ public class Snap extends CardGame{
         shuffleDeck();
 
         // -------------------- GAME LOOP --------------------
-        System.out.println("Current turn: " + currentTurn);
+
         while(!endGame) {
+            System.out.println("Current turn: " + currentTurn);
+            System.out.println("--------------------------");
             //Check of deck is empty
             if(noOfCards() == 0){
                 replenishDeck();
@@ -58,60 +66,70 @@ public class Snap extends CardGame{
                 System.out.println("-------------------------");
             }
 
-            //prompt to press enter to continue
-            System.out.println("Press enter to continue");
-            String nextTurnInput = scanner.nextLine();
+            //adds cards to comparison ArrayList
+            if(currentTurn == 1) {
+                compareCards.add(dealCard());
+                compareCards.add(dealCard());
+            }else if(currentTurn > 1){
+                compareCards.removeFirst();
+                compareCards.add(dealCard());
+            }
 
-            if(nextTurnInput.isEmpty()){
-                if(currentTurn == 1) {
-                    compareCards.add(dealCard());
-                    compareCards.add(dealCard());
-                }else if(currentTurn > 1){
-                    compareCards.removeFirst();
-                    compareCards.add(dealCard());
-                }
-
+                //display current cards to player
                 System.out.println(compareCards.get(0));
                 System.out.println(compareCards.get(1));
 
-                //Compares String value of current and previous card
 
-
-
+                //Check if card values match
                 if(compareCards.get(0).getStringCardValue().equals(compareCards.get(1).getStringCardValue())){
-                    ExecutorService executor = Executors.newSingleThreadExecutor();
+                    boolean inputReceived = false;
 
-                    Future<String> future = executor.submit(() -> {
-                        return scanner.nextLine();
-                    });
-                    try {
-                        String input = future.get(2, TimeUnit.SECONDS);
-                        if(input.equalsIgnoreCase("snap")){
-                            System.out.println("SNAP");
+                    long startTime = System.currentTimeMillis();
+                    long timeLimit = 2000; // 2 seconds in milliseconds
+
+                    while(System.currentTimeMillis() - startTime < timeLimit) {
+                        if(System.in.available() > 0) {
+                            inputReceived = true;
+                            break;
+                        }
+                        Thread.sleep(100); // wait a bit before checking again
+                    }
+
+                    if(inputReceived){
+                        String snapInput = scanner.nextLine();
+                        if(snapInput.equalsIgnoreCase("snap")){
                             if(currentTurn % 2 == 0){
-                                System.out.println(p2.getName() + " wins");
+                                System.out.println(p2.getName() + " WINS!");
                             } else {
-                                System.out.println(p1.getName() + " wins");
+                                System.out.println(p1.getName() + " WINS!");
                             }
                             endGame = true;
+                        } else{
+                            System.out.println("It's spelled S N A P");
+                            printNoOfCards();
+                            continue;
                         }
-
-                    }catch(TimeoutException  e) {
-                        System.out.println("You ran out of time");
-                        future.cancel(true);
-                    }catch(Exception e) {
-                        e.printStackTrace();
-                    }finally{
-                        executor.shutdown();
+                    } else {
+                        System.out.println("Too slow!");
+                        printNoOfCards();
+                        continue;
                     }
+
+                }else {
+                //prompt to press enter to continue
+                System.out.println("Press enter to continue");
+                String nextTurnInput = scanner.nextLine();
+
+                if(nextTurnInput.isEmpty()){
+                    currentTurn++;
+                    printNoOfCards();
+                    continue;
+                }else{
+                    System.out.println("Invalid input");
+                    endGame = true;
                 }
-
-                System.out.println("NoOfCardsInDeck: " + noOfCards());
-
-            } else{
-                System.out.println("Invalid input");
-                endGame = true;
             }
+            printNoOfCards();
             currentTurn++;
         }
     }
